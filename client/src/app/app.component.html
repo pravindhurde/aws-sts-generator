@@ -1,0 +1,2 @@
+<ng-template [ngIf]="userId==''"><app-login  class="login" (loginEvent)="login($event)"></app-login></ng-template>
+<ng-template [ngIf]="userId!=''"><app-dashboard [userId]="userId" (logoutEvent)="logout($event)"></app-dashboard></ng-template>

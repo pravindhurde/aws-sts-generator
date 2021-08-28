@@ -1,0 +1,60 @@
+.zs-overlay{
+    display: none;
+}
+
+.zs-dialog{
+    z-index: 9999 !important;
+    box-shadow: @zs-dialog-shadow;
+    width: @zs-dialog-min-width;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    background-color: white;
+    opacity: 1;
+    display: none;
+    min-height: 300px;    
+    max-height: 70vh !important;
+    overflow-y: scroll;   
+
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 4% !important;
+}
+
+section>div{
+    padding: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.zs-icon-close{
+    text-decoration: none !important;
+    color: black;
+}
+
+.zs-inverse{
+    background-color:  rgba(0,0,0,0.8);;
+}
+
+.zs-bg-danger{
+    background-color: red;
+}
+
+// Available variables
+@zs-dialog-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(26, 22, 40, 0.12), 0px 10px 20px rgba(26, 22, 40, 0.18); //blur-3
+@zs-dialog-focus-shadow: @zs-dialog-shadow;
+
+@zs-dialog-border-radius: 0;
+@zs-dialog-border: none;
+
+
+@zs-overlay-background: rgba(255, 255, 255, 0.9);
+
+@zs-dialog-width: 600px; //Max-width
+
+@zs-dialog-min-width: 384px;
+@zs-dialog-min-height: 152px;

@@ -1,0 +1,83 @@
+<div class="zs-grid-2cols">
+	<div>
+		<h1>Start new process</h1>
+	</div>
+	<div><button class="zs-button zs-solid-button zs-size-s" (click)="addLevel()">Add level</button></div>
+</div>
+
+<h2 class="banner-red" *ngIf="showError==true">{{errorMessage}}</h2>
+
+
+<div class="zs-grid-2cols start-process">
+	<div class="start-process-form">
+		<form is="zs-form ">
+			<section *ngFor="let a of approvalLevelMap;let i = index;">
+				<p><b>Level {{i+1}}</b></p>
+				<div class="zs-grid-2cols">
+					<div>
+						<label>Number of approvers</label>
+						<select name="app_{{i}}" (change)="addApprover(i,$event)" value="{{a.approversCount}}">
+							<option value="0">Select number</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</div>
+					<div class="margin-2">
+						<button class="zs-button zs-button-solid zs-danger-border zs-danger-background zs-size-xxs"
+							(click)="removeLevel(i)">x</button>
+
+					</div>
+				</div>
+
+				<div *ngIf="a.approvers.length>0">
+
+					<div *ngFor="let j of numCount(a.approversCount);let k = index;">
+						<label>User {{k+1}}</label>
+						<input type="text" name="input {{k}}" (change)="updateUsers(i,k,$event)"
+							value="{{a.approvers[k]}}">
+					</div>
+					<div class="flags">
+						<label>AllMustComplete</label>
+						<input type="checkbox" name="allMustComplete {{i}}" (change)="updateFlag(i,$event)"
+							value="{{a.allMustComplete}}" *ngIf="a.allMustComplete" checked>
+						<input type="checkbox" name="allMustComplete {{i}}" (change)="updateFlag(i,$event)"
+							value="{{a.allMustComplete}}" *ngIf="!a.allMustComplete">
+						<label>AllMustApprove</label>
+						<input type="checkbox" name="allMustApprove {{i}}" (change)="updateFlag(i,$event)"
+							*ngIf="a.allMustApprove" checked>
+						<input type="checkbox" name="allMustApprove {{i}}" (change)="updateFlag(i,$event)"
+							*ngIf="!a.allMustApprove">
+					</div>
+				</div>
+				<br><br>
+				<label>Want callback?</label>
+				<input type="checkbox" name="callback-check"  id="callback-check" (change)="callback($event)" [attr.value]="callbackCheck">
+				<br><br>
+				<div class="callback-inputs" *ngIf="callbackCheck==true">
+					<label>Callback Url</label>
+					<input name="callBackUrl" type="text"  (change)="updateCallback($event)" [attr.value]="callBackRequestParams.callBackUrl">
+					<label>Callback Request Body</label>
+					<textarea cols="3" rows="5" name="callBackRequestBody" (change)="updateCallback($event)" [attr.value]="callBackRequestParams.callBackRequestBody"></textarea>
+					<label>Authorization</label>
+					<input name="Authorization" type="text"  (change)="updateHeaders($event)" [attr.value]="callBackRequestParams.headers.Authorization">
+				</div>
+			</section>
+			
+
+		</form>
+		<button class="zs-button zs-size-s zs-border-rounded-0 start" (click)="getPreview()"
+			*ngIf="approvalLevelMap.length>0">Preview </button>
+		<button *ngIf="approvalLevelMap.length>0" class="zs-button zs-button-solid zs-size-s zs-border-rounded-0 start" (click)="getStartProcess($event)">Start
+				Process</button>
+	</div>
+	<div class="preview" *ngIf="isEmpty(preview) && approvalLevelMap.length>0">
+		<h1>Preview Request Body</h1>
+		<pre>{{preview|json}}</pre>
+		
+	</div>
+	<div class="start-process-details" *ngIf="isEmpty(startProcessDetails)">
+		<h1>Start process response</h1>
+		<pre>{{startProcessDetails | json}}</pre>
+	</div>
+</div>

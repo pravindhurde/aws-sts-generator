@@ -1,0 +1,25 @@
+<h1>Callback</h1>
+<form is="zs-form">
+	<label>Process ID</label><br>
+	<input type="text" required=true #pid placeholder="Enter process ID">
+	&nbsp;&nbsp;&nbsp;
+	<button class="zs-button zs-button-solid zs-size-xs" (click)="onSubmit($event, pid.value)">Search</button>
+</form>
+<br><br>
+<table class="zs-table" *ngIf="process!=null">
+	<thead>
+		<tr>
+			<th align="center">Callback Status</th>
+			<th align="center">Message</th>
+			<th align="center">Overall Status</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr >
+			<td align="center">{{process.callbackStatus?process.callbackStatus:"null" }}</td>
+			<td align="center">{{process.callbackMessage?process.callbackMessage:"null"}}</td>
+			<td align="center">{{process.overallStatus}}</td>
+		</tr>
+	</tbody>
+</table>

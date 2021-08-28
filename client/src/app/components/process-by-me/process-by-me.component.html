@@ -1,0 +1,64 @@
+<h1>Processes requested</h1>
+<h2 class="banner-blue" *ngIf="loading==true">Loading ...</h2>
+<h2 class="banner-red" *ngIf="loading==false && processess!=null && processess.length==0">No process started by this
+	user</h2>
+<div *ngIf="processess!=null && processess.length>0">
+	<label for="limit">Records per page</label>
+	<select (change)="limitChange($event)">
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+	</select>
+</div>
+
+<table class="zs-table" *ngIf="processess!=null && processess.length>0">
+	<thead>
+		<tr>
+			<th align="center">Process ID</th>
+			<th align="center">Tenant ID</th>
+			<th align="center">Start Time</th>
+			<th align="center">Approval Levels</th>
+			<th align="center">Approvals Details</th>
+			<th align="center">Requester</th>
+			<th align="center">Process State</th>
+			<th align="center">Action</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let p of processess">
+			<td align="center">{{p.id}}</td>
+			<td align="center">{{p.tenantId}}</td>
+			<td align="center">{{p.startTime | date}}</td>
+			<td align="center">{{p.approvals.approvalLevels}}</td>
+			<td align="center"><button class="zs-button  zs-size-xs zs-button-solid"
+					(click)="setTempMap(p.approvals.approvalLevelMap);toggle(!overlay);" onclick="document.getElementById('dialog2').show();return false;">Show</button></td>
+			<td align="center">{{p.requester.userId}}</td>
+			<td align="center">{{p.processState}}</td>
+			<td align="center"><button class="" (click)="delete(p.id)"><span
+						class="zs-icon zs-icon-delete">&#x274C;</span></button></td>
+		</tr>
+	</tbody>
+</table>
+
+<zs-pagination *ngIf="processess!=null && processess.length>0" (click)="changePage($event)" class="zs-pagination"
+	mode="action" [attr.items-count]="pagination.totalRecords" [attr.page-size]="limit" current-page="1">
+</zs-pagination>
+
+<zs-dialog class="zs-dialog" id="dialog2">
+	<header>
+		<h1>Approval Level Map</h1><a class="zs-icon zs-icon-close" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();"  (click)="toggle(!overlay)">x</a>
+	</header>
+	<section>
+		<pre>
+			{{tempMap|json}}
+		</pre>
+	</section>
+	
+<footer>
+		<button class="zs-button zs-button-solid zs-size-xxs" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();"  (click)="toggle(!overlay)">Close</button>
+	</footer> </zs-dialog><div *ngIf="overlay==true" class="modal-overlay" id="modal-overlay" ></div>
+
+

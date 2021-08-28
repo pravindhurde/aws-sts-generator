@@ -1,0 +1,169 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/zsui/dist/core/core.css";
+@import "../node_modules/zsui/dist/table/table.css";
+@import "../node_modules/zsui/dist/button/button.css";
+@import "../node_modules/zsui/dist/layoutPage/layoutPage.css";
+@import "../node_modules/zsui/dist/utils/display.css";
+@import "../node_modules/zsui/dist/utils/size.css";
+@import "../node_modules/zsui/dist/actionField/actionField.css";
+@import "../node_modules/zsui/dist/utils/color.inverse.css";
+@import "../node_modules/zsui/dist/utils/color.css";
+@import "../node_modules/zsui/dist/utils/space.css";
+@import "../node_modules/zsui/dist/utils/responsiveSpace.css";
+@import "../node_modules/zsui/dist/utils/shadow.css";
+@import "../node_modules/zsui/dist/utils/font.css";
+@import "../node_modules/zsui/dist/button/button.css";
+@import "../node_modules/zsui/dist/utils/border.css";
+
+//@import '../node_modules/zsui/src/core/core.less';
+//@import '../node_modules/zsui/src/tooltip/tooltip.less';
+//@import '../node_modules/zsui/src/field/field.less'; //...etc.
+@import '../node_modules/zsui/src/core/mixins.less';
+@import '../node_modules/zsui/src/core/relative.less';
+@import '../node_modules/zsui/src/configuration/config.less';
+@import "../node_modules/zsui/dist/select/select.css";
+@import "../node_modules/zsui/dist/checkboxRadio/checkboxRadio.css";
+@import "../node_modules/zsui/dist/actionField/actionField.css";
+@import "../node_modules/zsui/dist/card/card.css";
+@import "../node_modules/zsui/dist/pagination/pagination.css";
+@import "../node_modules/zsui/dist/layout/layoutGrid.css";
+@import "../node_modules/zsui/src/layout/layoutGrid.less";
+@import '../src/config.less'; // Your `config.less` file generated in step 5.
+body{
+    margin: 0;
+    min-height: 100vh !important;
+    // width: 100vw !important;
+    overflow: auto;
+}
+.zs-brand-bar{
+    display: flex
+}
+.zs-app-name{
+    font-size: large;
+    font-weight: 600;
+}
+.end{
+    float: right;
+}
+@import '../node_modules/zsui/src/core/mixins.less';
+@import '../node_modules/zsui/src/core/relative.less';
+@import '../node_modules/zsui/dist/core/core.css';
+//@import '../node_modules/zsui/dist/core/relative.css';
+@import './config.less';
+@import './config.css';
+
+// Include components
+//@import '../node_modules/zsui/src/core/core.less';
+//@import '../node_modules/zsui/src/tooltip/tooltip.less';
+@import '../node_modules/zsui/dist/button/button.css'; //...etc.
+@import '../node_modules/zsui/dist/actionField/actionField.css';
+@import '../node_modules/zsui/dist/field/field.css';
+@import '../node_modules/zsui/dist/select/select.css';
+
+// Configuration
+@import '../node_modules/zsui/src/configuration/config.less';
+@import '../node_modules/zsui/src/configuration/config.css';
+
+
+
+@zs-select-border-color: @zs-border-color;
+@zs-select-border: 1px solid @zs-select-border-color;
+
+@zs-select-text-color: @zs-text-color;
+
+//@zs-select-icon-color: @zs-interactive-icon-secondary-color;
+// @zs-select-icon-hover-color: @zs-interactive-icon-secondary-hover-color;
+// @zs-select-icon-focus-color: @zs-interactive-icon-secondary-focus-color;
+// @zs-select-icon-active-color: @zs-interactive-icon-secondary-active-color;
+
+// Applies to Search dropdown overlay and menu container
+@zs-select-overlay-text-color: @zs-text-color;
+@zs-select-overlay-bg-color: transparent;
+@zs-select-overlay-border: 1px solid @zs-select-border-color;
+@zs-search-dropdown-border: 1px solid @zs-select-border-color;
+@zs-select-placeholder-active-text-color: @zs-field-placeholder-color;
+@zs-select-signifier-icon-size: 1.5em;
+
+
+input[type=text]{
+    margin-top: 5px;
+    height: 25px;
+}
+input[type=text]:focus{
+    outline: #2D8B93;
+    border: solid 1px #2D8B93;
+    height: 25px !important;
+    margin-top: 5px;
+    background-color: #FAFAFA;
+}
+
+.banner-red{
+    background: #FFB6A5 !important;
+    padding: 2%;
+    border: 1px solid red;
+    font-size: 12px;
+}
+
+.banner-blue{
+    background:#EEEEFF !important;
+    padding: 2%;
+    border: 1px solid #A6B2F3 !important;
+    font-size: 12px;
+}
+
+a{
+    cursor: pointer;
+}
+body{
+    font-family: sans-serif;
+    overflow: hidden;
+}
+.modal-overlay {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // display: none;
+    background-color: black;
+    opacity: 0.7;
+  }
+
+  .zs-icon-arrow-left{
+    border: solid black !important;
+    border-width: 0 3px 3px 0 !important;
+    display: inline-block !important;
+    padding: 3px !important;
+    transform: rotate(135deg) !important;
+  -webkit-transform: rotate(135deg) !important;margin: -4px -2px !important;
+  }
+  .zs-icon-arrow-right{
+    border: solid black !important;
+    border-width: 0 3px 3px 0 !important;
+    display: inline-block !important;
+    padding: 3px !important;
+    transform: rotate(-45deg) !important;
+    -webkit-transform: rotate(-45deg) !important;
+    margin: -5px !important;
+  }
+  .zs-icon-arrow-first  {
+    width: 0 !important; 
+    height: 0 !important; 
+    border-top: 10px solid transparent !important;
+    border-bottom: 10px solid transparent !important; 
+    
+    border-right:10px solid black !important; 
+    margin-left:-2px
+    
+    }
+    .zs-icon-arrow-last  {
+        width: 0 !important; 
+        height: 0 !important; 
+        border-top: 10px solid transparent !important;
+        border-bottom: 10px solid transparent !important; 
+        
+        border-left:10px solid black !important; 
+        margin-left:3px
+        }
+       

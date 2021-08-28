@@ -1,0 +1,66 @@
+<h1>Tasks for assignee</h1>
+<h2 class="banner-blue" *ngIf="loading==true">Loading ...</h2>
+<h2 class="banner-red" *ngIf="loading==false && tasks!=null && tasks.length==0">No tasks present for this user</h2>
+<div *ngIf="tasks!=null && tasks.length>0">
+	<label for="limit">Records per page</label>
+	<select (change)="limitChange($event)">
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+	</select>
+</div>
+<table class="zs-table" *ngIf="tasks!=null && tasks.length>0">
+	<thead>
+		<tr>
+			<th align="center">Task Id</th>
+			<th align="center">Task Name</th>
+			<th align="center">Process Id</th>
+			<th align="center">Assignee ID</th>
+
+			<th align="center">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let t of tasks">
+			<td align="center">{{t.id}}</td>
+			<td align="center">{{t.name}}</td>
+			<td align="center">{{t.processInstanceId}}</td>
+			<td align="center">{{t.assignee}}</td>
+			<td align="center"><button class="zs-button  zs-size-xs zs-button-solid" (click)="setTempId(t.id);toggle(!overlay)"
+					onclick="document.getElementById('dialog1').show();return false;">Action</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<zs-pagination *ngIf="tasks!=null && tasks.length>0" class="zs-pagination" (click)="changePage($event)" mode="action"
+	[attr.items-count]="pagination.totalRecords" [attr.page-size]="limit" current-page="1"></zs-pagination>
+
+
+<div class="zs-overlay zs-inverse"></div>
+<zs-dialog class="zs-dialog" id="dialog1">
+	<header>
+		<h1>Process Task</h1><a class="zs-icon zs-icon-close" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();" (click)="toggle(!overlay)">x</a>
+	</header>
+	<section>
+		<div>
+			<label>Task Id</label>
+			<input disabled [value]="tempId">
+		</div>
+		<div>
+			<label>Message</label>
+			<input (change)="onChange($event)" type="text" placeholder="Enter Message" required>
+		</div>
+		<div>
+			<button (click)="takeAction('approve',$event)" onclick="this.parentNode.parentNode.parentNode.close();" (click)="toggle(!overlay)"
+				class="zs-button zs-button-solid zs-danger-border zs-danger-background zs-size-xs">Approve</button>
+			<button (click)="takeAction('reject',$event)" onclick="this.parentNode.parentNode.parentNode.close();" (click)="toggle(!overlay)"
+				class="zs-button zs-button-solid zs-danger-border zs-danger-background zs-size-xs">Reject</button>
+			<button (click)="takeAction('review',$event);" onclick="this.parentNode.parentNode.parentNode.close();" (click)="toggle(!overlay)"
+				class="zs-button zs-button-solid zs-danger-border zs-danger-background zs-size-xs">Review</button>
+		</div>
+	</section>
+<footer>
+		<button class="zs-button zs-button-solid zs-size-xxs" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();"  (click)="toggle(!overlay)">Close</button>
+	</footer> </zs-dialog><div *ngIf="overlay==true" class="modal-overlay" id="modal-overlay" ></div>

@@ -1,0 +1,33 @@
+<h1>Active tasks</h1>
+<h2 class="banner-blue" *ngIf="loading==true">Loading ...</h2>
+<h2 class="banner-red" *ngIf="loading==false && tasks!=null && tasks.length==0">No tasks for this user</h2>
+<div *ngIf="tasks!=null && tasks.length>0">
+	<label for="limit">Records per page</label>
+	<select (change)="limitChange($event)">
+		<option value="10">10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+	</select>
+</div>
+
+<table class="zs-table" *ngIf="tasks!=null && tasks.length>0">
+	<thead>
+		<tr>
+			<th align="center">Task ID</th>
+			<th align="center">Name</th>
+			<th align="center">Process Instance ID</th>
+			<th align="center">Assignee</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let t of tasks">
+			<td align="center">{{t.id}}</td>
+			<td align="center">{{t.name}}</td>
+			<td align="center">{{t.processInstanceId}}</td>
+			<td align="center">{{t.assignee}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<zs-pagination *ngIf="tasks!=null && tasks.length>0" (click)="changePage($event)" class="zs-pagination" mode="action"
+	[attr.items-count]="pagination.totalRecords" [attr.page-size]="limit" current-page="1"></zs-pagination>

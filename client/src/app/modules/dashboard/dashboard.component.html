@@ -1,0 +1,40 @@
+<div class="zs-layout-page zs-height-100 zs-width-100 dashboard">
+	<header class="zs-master-header zs-height-100">
+		<div class="zs-brand-bar zs-bg-surface-5 navbar">
+			<div class="left">
+				<div class="zs-logo-container zs-layout-flex zs-padding-0.5-2-0.5-2">
+					<img height="48" width="48"
+						src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiPg0KPHBhdGggZD0iTTQ1LjY3NzMgNDAuMDM1VjE5Ljc3OThMNDEuNTAzNCAyMy45NjQ2VjQ0LjIxOThMNDUuNjc3MyA0MC4wMzVaIiBmaWxsPSIjQzFDNkM4Ii8+DQo8cGF0aCBkPSJNMjIuMTc0NiA0MC4wMzVWMTkuNzc5OEwxOCAyMy45NjQ2VjQ0LjIxOThMMjIuMTc0NiA0MC4wMzVaIiBmaWxsPSIjOThBNEFFIi8+DQo8cGF0aCBkPSJNMjMuODc2IDUwLjEwOThMMjguMDQ5OCA0NS45MjU4VjM0LjE0NUwyMy44NzYgMzguMzI5OFY1MC4xMDk4WiIgZmlsbD0iI0VDNzIwMCIvPg0KPHBhdGggZD0iTTI4LjA0OTggMTMuODkwNkwyMy44NzYgMTguMDc0NlYyOS44NTU0TDI4LjA0OTggMjUuNjcwNlYxMy44OTA2WiIgZmlsbD0iIzk4QTRBRSIvPg0KPHBhdGggZD0iTTIzLjg3NiAyOS44NTUyVjM4LjMyOTZMMjguMDQ5OCAzNC4xNDQ4VjI1LjY3MDRMMjMuODc2IDI5Ljg1NTJaIiBmaWxsPSIjOEQ0OTAwIi8+DQo8cGF0aCBkPSJNMjkuNzUxNSA0NC4yMlY1NkwzMy45MjYxIDUxLjgxNTJWNDAuMDM1MkwyOS43NTE1IDQ0LjIyWiIgZmlsbD0iI0MxQzZDOCIvPg0KPHBhdGggZD0iTTI5Ljc1MTUgMzIuNDM5NFYzNS43NDVMMzMuOTI2MSAzMS41NjFWMjguMjU1NEwyOS43NTE1IDMyLjQzOTRaIiBmaWxsPSIjRUM3MjAwIi8+DQo8cGF0aCBkPSJNMzMuOTI2MSA4TDI5Ljc1MTUgMTIuMTg0OFYyMy45NjQ4TDMzLjkyNjEgMTkuNzhWOFoiIGZpbGw9IiM5OEE0QUUiLz4NCjxwYXRoIGQ9Ik0yOS43NTE1IDQ0LjIyMDJMMzMuOTI2MSA0MC4wMzU0VjMxLjU2MUwyOS43NTE1IDM1Ljc0NVY0NC4yMjAyWiIgZmlsbD0iI0IzNTkwMCIvPg0KPHBhdGggZD0iTTMzLjkyNjEgMjguMjU1VjE5Ljc3OThMMjkuNzUxNSAyMy45NjQ2VjMyLjQzOUwzMy45MjYxIDI4LjI1NVoiIGZpbGw9IiM4RDQ5MDAiLz4NCjxwYXRoIGQ9Ik0zOS44MDIxIDM0LjE0NUwzNS42Mjc0IDM4LjMyOThWNTAuMTA5OEwzOS44MDIxIDQ1LjkyNThWMzQuMTQ1WiIgZmlsbD0iI0MxQzZDOCIvPg0KPHBhdGggZD0iTTM5LjgwMjEgMjUuNjcwNlYxMy44OTA2TDM1LjYyNzQgMTguMDc0NlYyOS44NTU0TDM5LjgwMjEgMjUuNjcwNloiIGZpbGw9IiNFQzcyMDAiLz4NCjxwYXRoIGQ9Ik0zOS44MDIxIDI1LjY3MDRMMzUuNjI3NCAyOS44NTUyVjM4LjMyOTZMMzkuODAyMSAzNC4xNDQ4VjI1LjY3MDRaIiBmaWxsPSIjQjM1OTAwIi8+DQo8L2c+DQo8ZGVmcz4NCjxjbGlwUGF0aCBpZD0iY2xpcDAiPg0KPHJlY3Qgd2lkdGg9IjI3LjY3NzQiIGhlaWdodD0iNDgiIGZpbGw9IndoaXRlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOCA4KSIvPg0KPC9jbGlwUGF0aD4NCjwvZGVmcz4NCjwvc3ZnPg0K">
+				</div>
+				<div class="zs-app-name zs-text-inverse zs-padding-2 zs-font-weight-bold">
+					<span>Approval Workflow</span>
+				</div>
+			</div>
+			<div class="right">
+				<div class=" zs-padding-2">
+					<span class=" zs-font-weight-bold zs-text-inverse userId">{{userId}}</span>
+				</div>
+				<div class=" zs-padding-2" (click)="logout()">
+					<span class="zs-text-inverse zs-font-weight-bold">Logout</span>
+				</div>
+			</div>
+		</div>
+
+	</header>
+	<nav class="zs-side-navigation zs-bg-surface-1 zs-shadow-flat-right-8 zs-width-200px">
+		<app-sidenav class="zs-color-iv" [userId]="userId"></app-sidenav>
+	</nav>
+	<main class="zs-display-block">
+		<section>
+			<router-outlet> </router-outlet>
+		</section>
+	</main>
+
+	<!-- <footer>
+		<div class="zs-float-left zs-width-200px zs-display-inline-block">
+			&nbsp;</div>
+		<div>
+			...Add section content Here...
+		</div>
+	</footer> -->
+</div>

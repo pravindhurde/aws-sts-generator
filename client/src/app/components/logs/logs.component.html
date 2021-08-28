@@ -1,0 +1,59 @@
+<h1>Task Audit Logs</h1>
+<h2 class="banner-blue" *ngIf="loading==true">Loading ...</h2>
+<h2 class="banner-red" *ngIf="loading==false && logs!=null && logs.length==0">No logs for given filter</h2>
+<div class="logs">
+	<div><label for="processId">Process ID</label><input type="text" name="processInstanceId"
+			(change)="addFilter($event)" placeholder="Enter Process ID"></div>
+	<div><label for="requesterId">Requester ID</label><input type="text" name="requesterId" (change)="addFilter($event)"
+			placeholder="Enter Requester ID"></div>
+	<div><label for="processStatus">Process Status</label><input type="text" name="processStatus"
+			(change)="addFilter($event)" placeholder="Enter Process Status"></div>
+	<div><label for="assigneeId">Assignee ID</label><input type="text" name="assigneeId" (change)="addFilter($event)"
+			placeholder="Enter Assignee ID"></div>
+	<div><label for="taskId">Task ID</label><input type="text" name="taskId" (change)="addFilter($event)"
+			placeholder="Enter Task ID"></div>
+	<div><label for="taskLogStatus">Task Log Status</label><input type="text" name="taskLogStatus"
+			(change)="addFilter($event)" placeholder="Enter Task Log Status"></div>
+	<div><label for="taskLogDate">Task Log Date</label><input type="text" name="taskLogDate" (change)="addFilter($event)"
+			placeholder="Enter Task Log Date"></div>
+</div>
+<button class="zs-button zs-button-solid zs-size-s margin-2" (click)="getData()">Search</button>
+
+<table class="zs-table" *ngIf="logs!=null && logs.length>0">
+	<thead>
+		<tr>
+			<th align="center">Process ID</th>
+			<th align="center">Start Date</th>
+			<th align="center">Process Status</th>
+			<th align="center">Requester ID</th>
+			<th align="center">Requester Name</th>
+			<th align="center">Task</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let t of logs">
+			<td align="center">{{t.processInstanceId}}</td>
+			<td align="center">{{t.processStartDate}}</td>
+			<td align="center">{{t.processStatus}}</td>
+			<td align="center">{{t.requesterId}}</td>
+			<td align="center">{{t.requesterName}}</td>
+			<td align="center"><button class="zs-button  zs-size-xs zs-button-solid" (click)="setTempMap(t.tasks);toggle(!overlay)" onclick="document.getElementById('dialog2').show();
+				return false;">Show</button></td>
+		</tr>
+	</tbody>
+</table>
+
+<zs-dialog class="zs-dialog" id="dialog2">
+	<header>
+		<h1>Task Logs</h1><a class="zs-icon zs-icon-close" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();" (click)="toggle(!overlay)">x</a>
+	</header>
+	<section>
+		<pre>
+			{{tempMap|json}}
+		</pre>
+	</section>
+<footer>
+		<button class="zs-button zs-button-solid zs-size-xxs" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();"  (click)="toggle(!overlay)">Close</button>
+	</footer> </zs-dialog><div *ngIf="overlay==true" class="modal-overlay" id="modal-overlay" ></div>

@@ -1,0 +1,43 @@
+<h1>Tasks by Process ID</h1>
+<h2 class="banner-blue" *ngIf="loading==true">Loading ...</h2>
+<h2 class="banner-red" *ngIf="loading==false && tasks!=null && tasks.length==0">No tasks for this process ID</h2>
+<h2 class="banner-red" *ngIf="pidEmpty==true">Enter a process ID</h2>
+
+<form is="zs-form">
+	<label>Process ID</label><br>
+	<input type="text" required=true #pid placeholder="Enter process ID">&nbsp;&nbsp;&nbsp;
+	<button class="zs-button zs-button-solid zs-size-xs" (click)="onSubmit($event, pid.value)">Search</button>
+</form>
+
+<br><br>
+
+<div *ngIf="tasks!=null && tasks.length>0">
+	<label for="limit">Records per page&nbsp;&nbsp;</label>
+	<select (change)="limitChange($event)">
+		<option value="10" selected>10</option>
+		<option value="20">20</option>
+		<option value="30">30</option>
+	</select>
+</div>
+
+<table class="zs-table" *ngIf="tasks!=null && tasks.length>0">
+	<thead>
+		<tr>
+			<th align="center">Task ID</th>
+			<th align="center">Message</th>
+			<th align="center">Process Instance ID</th>
+			<th align="center">Assignee</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let t of tasks">
+			<td align="center">{{t.id}}</td>
+			<td align="center">{{t.name}}</td>
+			<td align="center">{{t.processInstanceId}}</td>
+			<td align="center">{{t.assignee}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<zs-pagination *ngIf="tasks!=null && tasks.length>0" (click)="changePage($event)" class="zs-pagination" mode="action"
+	[attr.items-count]="pagination.totalRecords" [attr.page-size]="limit" current-page="1"></zs-pagination>

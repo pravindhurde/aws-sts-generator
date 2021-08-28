@@ -1,0 +1,51 @@
+<h1>Get Process Details by Process ID</h1>
+<h2 class="banner-blue" *ngIf="loading==true">Loading ...</h2>
+<h2 class="banner-red" *ngIf="loading==false && process==null">No process for this process ID</h2>
+<h2 class="banner-red" *ngIf="pidEmpty==true">Enter a process ID</h2>
+
+<form is="zs-form">
+	<label>Process ID</label><br>
+	<input type="text" required=true #pid placeholder="Enter process ID">&nbsp;&nbsp;&nbsp;
+	<button class="zs-button zs-button-solid zs-size-xs" (click)="onSubmit($event, pid.value)">Search</button>
+</form>
+
+<table class="zs-table" *ngIf="process!=null">
+	<thead>
+		<tr>
+			<th align="center">Process ID</th>
+			<th align="center">Tenant ID</th>
+			<th align="center">Start Time</th>
+			<th align="center">Approval Levels</th>
+			<th align="center">Approvals Details</th>
+			<th align="center">Requester</th>
+			<th align="center">Process State</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td align="center">{{process.id}}</td>
+			<td align="center">{{process.tenantId}}</td>
+			<td align="center">{{process.startTime | date}}</td>
+			<td align="center">{{process.approvals.approvalLevels}}</td>
+			<td align="center"><button class="zs-button  zs-size-xs zs-button-solid"
+					(click)="setTempMap(process.approvals.approvalLevelMap) ;toggle(!overlay)" onclick="document.getElementById('dialog2').show();
+				return false;">Show</button></td>
+			<td align="center">{{process.requester.userId}}</td>
+			<td align="center">{{process.processState}}</td>
+		</tr>
+	</tbody>
+</table>
+<zs-dialog class="zs-dialog" id="dialog2">
+	<header>
+		<h1>Approval Level Map</h1><a class="zs-icon zs-icon-close" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();" (click)="toggle(!overlay)">x</a>
+	</header>
+	<section>
+		<pre>
+			{{tempMap|json}}
+		</pre>
+	</section>
+<footer>
+		<button class="zs-button zs-button-solid zs-size-xxs" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();"  (click)="toggle(!overlay)">Close</button>
+	</footer> </zs-dialog><div *ngIf="overlay==true" class="modal-overlay" id="modal-overlay" ></div>

@@ -1,0 +1,191 @@
+<h1>Historic Data</h1>
+
+<h2 class="banner-blue" *ngIf="loading==true">Loading ...</h2>
+<h2 class="banner-red" *ngIf="loading==false && empty==true">No data found</h2>
+<h2 class="banner-red" *ngIf="emptyPid==true">Enter a process ID</h2>
+<h2 class="banner-red" *ngIf="emptyTid==true">Enter a task ID</h2>
+
+<div class="zs-grid-2cols">
+	<h3>Choose what you want to fetch</h3>
+	<h3 *ngIf="getVar1 !=null">Choose by what you want to fetch</h3>
+
+</div>
+<div class="zs-grid-2cols">
+	<div>
+
+		<form #myForm1="ngForm" (change)="getVar1Change(myForm1.value)" novalidate>
+			<label class="zs-radio">
+				<input type="radio" name="radio1" value="task" id="task" name="getVar1" ngModel>
+				<span radio>Task</span>
+			</label>
+			<label class="zs-radio">
+				<input type="radio" name="radio1" value="process" id="process" name="getVar1" ngModel>
+				<span radio>Process</span>
+			</label>
+		</form>
+
+
+	</div>
+	<div class="zs-grid-2cols">
+		
+
+		<div>
+
+			
+
+			<form *ngIf="getVar1=='task'" #myForm2="ngForm" (change)="getVar2Change(myForm2.value)" novalidate>
+				<label class="zs-radio">
+					<input type="radio" name="radio2" value="assignee" id="assignee" name="getVar2" ngModel>
+					<span radio>Assignee</span>
+				</label>
+				<label class="zs-radio">
+					<input type="radio" name="radio2" value="pid" id="pid" name="getVar2" ngModel>
+					<span radio>Process ID</span>
+				</label>
+				<label class="zs-radio">
+					<input type="radio" name="radio2" value="tid" id="tid" name="getVar2" ngModel>
+					<span radio>Task ID</span>
+				</label>
+			</form>
+
+			<form *ngIf="getVar1=='process'" #myForm3="ngForm" (change)="getVar3Change(myForm3.value)" novalidate>
+				<label class="zs-radio">
+					<input type="radio" name="radio3" value="pid" id="pid" name="getVar3" selected ngModel>
+					<span radio>Process ID</span>
+				</label>
+			</form>
+
+		</div>
+
+		<div class=" zs-align-self-center zs-justify-self-center">
+		
+			<form *ngIf="getVar2=='pid' || getVar3=='pid'">
+				<div>
+					<label>Enter Process ID</label><br>
+					<input type="text" required=true #pid>&nbsp;&nbsp;
+					<button class="zs-button zs-button-solid zs-size-xs zs-align-self-end"
+						(click)="onSubmitPid(pid.value)">Search</button>
+				</div>
+			</form>
+
+			<form *ngIf="getVar2=='tid'">
+				<div>
+					<label>Enter Task ID</label><br>
+					<input type="text" required=true #tid>&nbsp;&nbsp;
+					<button class="zs-button zs-button-solid zs-size-xs"
+						(click)="onSubmitTid(tid.value)">Search</button>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+</div>
+
+<br> <br>
+
+<div>
+
+	<div *ngIf="showPag==true">
+		<label for="limit">Records per page</label>
+		<select (change)="limitChange($event)">
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="30">30</option>
+		</select>
+	</div>
+
+	<table class="zs-table" *ngIf="tasks!=null && tasks.length>0">
+		<thead>
+			<tr>
+				<th align="center">Task ID</th>
+				<th align="center">Name</th>
+				<th align="center">Process Instance ID</th>
+				<th align="center">Assignee</th>
+				<th align="center">Approver Message</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let t of tasks">
+				<td align="center">{{t.id}}</td>
+				<td align="center">{{t.name}}</td>
+				<td align="center">{{t.processInstanceId}}</td>
+				<td align="center">{{t.assignee}}</td>
+				<td align="center">{{t.approverMessage}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<zs-pagination *ngIf="showPag==true" (click)="changePage($event)" class="zs-pagination" mode="action"
+		[attr.items-count]="pagination.totalRecords" [attr.page-size]="limit" current-page="1">
+	</zs-pagination>
+
+	<table class="zs-table" *ngIf="task!=null">
+		<thead>
+			<tr>
+				<th align="center">Task ID</th>
+				<th align="center">Name</th>
+				<th align="center">Process Instance ID</th>
+				<th align="center">Assignee</th>
+				<th align="center">Approver Message</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td align="center">{{task.id}}</td>
+				<td align="center">{{task.name}}</td>
+				<td align="center">{{task.processInstanceId}}</td>
+				<td align="center">{{task.assignee}}</td>
+				<td align="center">{{task.approverMessage}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="zs-table" *ngIf="process!=null">
+		<thead>
+			<tr>
+				<th align="center">Process ID</th>
+				<th align="center">Tenant ID</th>
+				<th align="center">Start Time</th>
+				<th align="center">Approval Levels</th>
+				<th align="center">Approvals Details</th>
+				<th align="center">Requester</th>
+				<th align="center">Process State</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td align="center">{{process.id}}</td>
+				<td align="center">{{process.tenantId}}</td>
+				<td align="center">{{process.startTime | date}}</td>
+				<td align="center">{{process.approvals.approvalLevels}}</td>
+				<td align="center"><button class="zs-button  zs-size-xs zs-button-solid"
+						(click)="setTempMap(process.approvals.approvalLevelMap);" onclick="document.getElementById('dialog3').show();
+					return false;">Show
+					</button>
+				</td>
+				<td align="center">{{process.requester.userId}}</td>
+				<td align="center">{{process.processState}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</div>
+
+
+<zs-dialog class="zs-dialog" id="dialog3">
+	<header>
+		<h1>Approval Level Map</h1><a class="zs-icon zs-icon-close" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();" (click)="toggle(!overlay)">x</a>
+	</header>
+	<section>
+		<pre>
+			{{tempMap|json}}
+		</pre>
+	</section>
+<footer>
+		<button class="zs-button zs-button-solid zs-size-xxs" href="javascript:;"
+			onclick="this.parentNode.parentNode.close();"  (click)="toggle(!overlay)">Close</button>
+	</footer> </zs-dialog>
+<div *ngIf="overlay==true" class="modal-overlay" id="modal-overlay"></div>
